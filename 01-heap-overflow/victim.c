@@ -20,7 +20,7 @@ void boring()
  */
 typedef struct
 {
-    char buf[32];
+    char buffer[32];
     void (*callback)(void);
 } heap_obj_t;
 
@@ -33,9 +33,9 @@ int main()
     fflush(stdout);
 
     /* Vulnerable: reads up to 128 bytes into a 32-byte buffer, no bound
-     * check against sizeof(obj->buf). A long enough input overflows into
+     * check against sizeof(obj->buffer). A long enough input overflows into
      * the adjacent obj->callback field. */
-    read(0, obj->buf, 128);
+    read(0, obj->buffer, 128);
 
     obj->callback();
 
